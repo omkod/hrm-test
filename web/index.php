@@ -5,7 +5,7 @@ use Dotenv\Dotenv;
 require __DIR__ . '/../vendor/autoload.php';
 require __DIR__ . '/../vendor/yiisoft/yii2/Yii.php';
 
-$dotenv = Dotenv::createImmutable(__DIR__.'/..');
+$dotenv = Dotenv::createUnsafeImmutable(__DIR__.'/..');
 $dotenv->load();
 
 // comment out the following two lines when deployed to production
