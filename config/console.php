@@ -1,5 +1,7 @@
 <?php
 
+use webvimark\modules\UserManagement\UserManagementModule;
+
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
 
@@ -12,6 +14,12 @@ $config = [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
         '@tests' => '@app/tests',
+    ],
+    'modules'=>[
+      'user-management' => [
+        'class' => UserManagementModule::class,
+        'controllerNamespace'=>'vendor\webvimark\modules\UserManagement\controllers', // To prevent yii help from crashing
+      ],
     ],
     'components' => [
         'cache' => [

@@ -5,10 +5,12 @@
 
 use app\assets\AppAsset;
 use app\widgets\Alert;
-use yii\bootstrap5\Breadcrumbs;
-use yii\bootstrap5\Html;
-use yii\bootstrap5\Nav;
-use yii\bootstrap5\NavBar;
+use yii\bootstrap\Html;
+use yii\bootstrap\Nav;
+use yii\bootstrap\NavBar;
+use yii\widgets\Breadcrumbs;
+use webvimark\modules\UserManagement\components\GhostMenu;
+use webvimark\modules\UserManagement\UserManagementModule;
 
 AppAsset::register($this);
 
@@ -37,23 +39,30 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
         'options' => ['class' => 'navbar-expand-md navbar-dark bg-dark fixed-top']
     ]);
     echo Nav::widget([
-        'options' => ['class' => 'navbar-nav'],
-        'items' => [
-            ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
-            Yii::$app->user->isGuest
-                ? ['label' => 'Login', 'url' => ['/site/login']]
-                : '<li class="nav-item">'
-                    . Html::beginForm(['/site/logout'])
-                    . Html::submitButton(
-                        'Logout (' . Yii::$app->user->identity->username . ')',
-                        ['class' => 'nav-link btn btn-link logout']
-                    )
-                    . Html::endForm()
-                    . '</li>'
-        ]
-    ]);
+      'options' => ['class' => 'navbar-nav'],
+      'items' => [
+        [
+          'label' => 'Backend routes',
+          'items'=> UserManagementModule::menuItems()
+        ],
+        ['label'=>'Login', 'url'=>['/user-management/auth/login']],
+        ['label'=>'Logout', 'url'=>['/user-management/auth/logout']],
+        ['label'=>'Registration', 'url'=>['/user-management/auth/registration']],
+        ['label'=>'Change own password', 'url'=>['/user-management/auth/change-own-password']],
+        ['label'=>'Password recovery', 'url'=>['/user-management/auth/password-recovery']],
+        ['label'=>'E-mail confirmation', 'url'=>['/user-management/auth/confirm-email']],
+        Yii::$app->user->isGuest
+          ? ['label' => 'Login', 'url' => ['/user-management/auth/login']]
+          : '<li class="nav-item">'
+          . Html::beginForm(['/user-management/auth/logout'])
+          . Html::submitButton(
+            'Logout (' . Yii::$app->user->identity->username . ')',
+            ['class' => 'nav-link btn btn-link logout']
+          )
+          . Html::endForm()
+          . '</li>'
+      ]]);
+
     NavBar::end();
     ?>
 </header>
