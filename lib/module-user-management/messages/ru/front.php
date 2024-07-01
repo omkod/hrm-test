@@ -49,4 +49,6 @@ return [
     'Too many attempts' => 'Лимит попыток превышен',
     'Unable to send message for email provided' => 'Не удалось отправить письмо на указанный email',
     'You could not login from this IP' => 'Вы не можете входить с этого IP',
+    'Welcome, {username}!' => 'Добро пожаловать, {username}!',
+    'Hello, {username}! Welcome to {hostname}' => 'Привет, {username}! Добро пожаловать на {hostname}',
 ];

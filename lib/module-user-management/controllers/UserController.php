@@ -5,6 +5,7 @@ namespace webvimark\modules\UserManagement\controllers;
 use webvimark\components\AdminDefaultController;
 use Yii;
 use webvimark\modules\UserManagement\models\User;
+use webvimark\modules\UserManagement\UserManagementModule;
 use webvimark\modules\UserManagement\models\search\UserSearch;
 use yii\web\NotFoundHttpException;
 
@@ -32,6 +33,8 @@ class UserController extends AdminDefaultController
 
 		if ( $model->load(Yii::$app->request->post()) && $model->save() )
 		{
+      $this->sendWelcomeEmail($model);
+
 			return $this->redirect(['view',	'id' => $model->id]);
 		}
 
@@ -63,4 +66,17 @@ class UserController extends AdminDefaultController
 		return $this->renderIsAjax('changePassword', compact('model'));
 	}
 
+    /**
+     * @param User $user
+     * @return void
+     */
+  private function sendWelcomeEmail(User $user): void
+  {
+      Yii::$app->mailer
+        ->compose(Yii::$app->getModule('user-management')->mailerOptions['welcomeEmailViewFile'], ['user' => $user])
+        ->setFrom(Yii::$app->getModule('user-management')->mailerOptions['from'])
+        ->setTo($user->email)
+        ->setSubject(UserManagementModule::t('front', 'Welcome, {username}!', ['username' => $user->username]))
+        ->send();
+  }
 }

@@ -35,7 +35,9 @@ class UserManagementModule extends \yii\base\Module
 	 * @var array
 	 * @see $_defaultMailerOptions
 	 */
-	public $mailerOptions = [];
+	public $mailerOptions = [
+    'welcomeEmailViewFile'     => '/mail/welcomeMail',
+  ];
 
 	/**
 	 * Default options for mailer
@@ -228,7 +230,7 @@ class UserManagementModule extends \yii\base\Module
 			Yii::$app->i18n->translations['modules/user-management/*'] = [
 				'class'          => 'yii\i18n\PhpMessageSource',
 				'sourceLanguage' => 'en',
-				'basePath'       => '@vendor/webvimark/module-user-management/messages',
+				'basePath'       => '@app/lib/module-user-management/messages',
 				'fileMap'        => [
 					'modules/user-management/back' => 'back.php',
 					'modules/user-management/front' => 'front.php',
