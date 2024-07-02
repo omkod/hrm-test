@@ -33,8 +33,7 @@ class UserController extends AdminDefaultController
 
 		if ( $model->load(Yii::$app->request->post()) && $model->save() )
 		{
-      $this->sendWelcomeEmail($model);
-
+			$this->sendWelcomeEmail($model);
 			return $this->redirect(['view',	'id' => $model->id]);
 		}
 
