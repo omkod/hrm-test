@@ -36,7 +36,7 @@ class UserManagementModule extends \yii\base\Module
 	 * @see $_defaultMailerOptions
 	 */
 	public $mailerOptions = [
-    'welcomeEmailViewFile'     => '/mail/welcomeMail',
+		'welcomeEmailViewFile'     => '/mail/welcomeMail',
   ];
 
 	/**

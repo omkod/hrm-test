@@ -15,9 +15,11 @@ class m240627_222036_create_employee_table extends Migration
         $this->createTable('{{%employee}}', [
           'id'               => $this->primaryKey(),
           'name'             => $this->string(255)->notNull(),
-          'email'            => $this->string(255)->unique()->notNull(),
-          'attestation_date' => $this->date(),
+          'email'            => $this->string(255)->unique()->notNull()->comment('Email пользователя. Уникален.'),
+          'attestation_date' => $this->date()->comment('Дата аттестации'),
         ]);
+
+        $this->addCommentOnTable('{{%employee}}', 'Таблица для хранения сотрудников');
     }
 
     /**
